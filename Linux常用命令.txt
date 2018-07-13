@@ -1,0 +1,61 @@
+ubuntue包管理器：    	apt-get install XXX
+centos包管理器：     	yum install XXX
+Ubuntue DNS解析配置：   /etc/resolv.conf 
+
+
+sz rz插件安装：
+
+root 账号登陆后，依次执行以下命令：
+1    cd /tmp
+2    wget http://www.ohse.de/uwe/releases/lrzsz-0.12.20.tar.gz
+3    tar zxvf lrzsz-0.12.20.tar.gz && cd lrzsz-0.12.20
+4    ./configure && make && make install
+      上面安装过程默认把lsz和lrz安装到了/usr/local/bin/目录下，现在我们并不能直接使用，下面创建软链接，并命名为rz/sz：
+
+1    cd /usr/bin
+2    ln -s /usr/local/bin/lrz rz
+3    ln -s /usr/local/bin/lsz sz
+	
+当Linux上个没有装sz/rz的时候， 在 Linux 服务器上或安装了 Python 的机器上，可以使用 nohup python -m SimpleHTTPServer [port]  快速搭建一个http服务
+
+
+当日志文件很大的时候，可以使用  grep XXX\ xxx * > file_name 命令（\为转义符，转义空格等）将过滤的信息重定向至 file_name，然后vim file_name进行查找
+grep Send_in\ record_id * > 111
+
+查看cpu占用率： top
+
+查找大文件：  du -hl --max-depth=1 /
+
+查看内核版本：uname -r
+查看内核所有信息：uname -a
+
+
+Linux下*.tar.gz文件解压缩命令
+    1.压缩命令：
+    　　命令格式：tar  -zcvf   压缩文件名.tar.gz   被压缩文件名
+        可先切换到当前目录下。压缩文件名和被压缩文件名都可加入路径。
+
+    2.解压缩命令：
+    　　命令格式：tar  -zxvf   压缩文件名.tar.gz
+    　　解压缩后的文件只能放在当前的目录。
+
+gzip filename --将filename压缩为filename.gz，原文件不再存在
+gzip -c filename > filename.gz --将filename压缩为filename.gz，保留原文件
+gzip -d filename.gz --将filename.gz解压为filename，原文件不再存在
+gzip -cd filename.gz > filename --将filename.gz解压为filename，保留原文件
+
+
+
+E138: 不能写入 viminfo 文件 /root/.viminfo
+ 
+前几天在使用vi编辑文件后，退出时报错：E138: 不能写入 viminfo 文件 /root/.viminfo!
+ 
+搜索了一下网络，得到解决办法：删除~/.viminf*.tmp文件
+ 
+在执行 rm -f ~/.viminf*.tmp 后 问题解决。
+ 
+关于此问题，以及 ~/.viminfo 文件的说明参见：
+Chasfer Peng http://www.cublog.cn/u1/58186/showart_1798247.html
+
+
+

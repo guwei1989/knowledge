@@ -1,0 +1,2 @@
+如何配置静态文件：
+https://www.cnblogs.com/starof/p/4682812.html

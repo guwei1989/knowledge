@@ -1,0 +1,59 @@
+1. window git安装包
+
+https://git-for-windows.github.io/
+
+2. mac
+
+Git安装工具：http://sourceforge.net/projects/git-osx-installer/
+
+通过Xcode安装：Xcode->Preferences->Downloads，选择“Command Line Tools”
+
+
+
+一 、设置Git的user name和email：
+
+$ git config --global user.name "xxx"
+$ git config --global user.email "xxx@xxx.com"
+
+
+二、生成SSH密钥过程：
+1.查看是否已经有了ssh密钥：	cd ~/.ssh
+如果没有密钥则不会有此文件夹，有则备份删除
+2.生存密钥：	$ ssh-keygen -t rsa -C “xxx@xxx.com”
+3.在github个人中心setting上添加ssh密钥，这要添加的是“id_rsa.pub”里面的公钥。
+
+
+
+
+使用Git初始化项目
+ 1、在Git官网上点击New repository新建项目；
+ 2、在本地新建一个同名文件；
+ 3、打开git bash切换到新建的文件目录；
+ 4、echo "# myprojectname">>README.md; //新建一个README文件并写入内容
+ 5、git init //git初始化
+ 6、git add .将全部文件添加到git中；git add README.md 将README文件单独添加
+ 7、git commit - m "first commit" //添加提交时的注释
+ 8、git remote add origin git@github.com:whathave/myprojectname.git //将git进行远程连线
+ 9、git push -u origin master //推代码更新fork仓库
+ 
+可能出现的错误
+
+1、fatal: remote origin already exists.//连线已经存在
+
+ 解决方法：执行 git remote rm origin 将已存在的连接删除
+
+2、error:failed to push som refs to.......
+
+ 解决方法：执行git pull origin master 先将远程服务器上的文件拉下来
+
+3、fatal: refusing to merge unrelated histories”//本地的和GitHub上没有共同祖先
+
+ 解决方法：执行git pull origin master --allow-unrelater-histories
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
