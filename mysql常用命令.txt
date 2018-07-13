@@ -13,25 +13,29 @@ mysql性能调优的10个方法：https://www.cnblogs.com/claireyuancy/p/7258314
 备份单个数据库的表结构（不备份实际数据）很快: mysqldump -uroot -p123456 mydb -d -h192.168.55.10 > F:\mydb.sql
 备份一个表：mysqldump -h192.168.55.10 -uroot -pmima irain_park table_name > /home/beifen0615.sql
 还原一个表：mysql -uroot -pmima irain_park < /home/beifen0615.sql
-
 插入一条数据：insert into 表名("aa", "bb", "cc") values("aa", "bb", "cc")
-
 删除一条数据：delete from 表名 where ..........
-
 修改一条数据：update 表名 set 字段名 = "值" where .........
 
 创建一个表： 
-CREATE TABLE Persons
-(
-    Id_P int,
-    LastName varchar(255),
-    FirstName varchar(255),
-    Address varchar(255),
-    City varchar(255)
-)    
+CREATE TABLE IF NOT EXISTS `user` (
+  `id` int(11) unsigned NOT NULL auto_increment,
+  `age` int(8) NOT NULL DEFAULT '0',
+  `viewtime` datetime,
+  `weight` smallint(6) NOT NULL DEFAULT '0',
+  `createtime` datetime DEFAULT CURRENT_TIMESTAMP,
+  `updatetime` datetime DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP,
+  PRIMARY KEY (`id`)
+  )ENGINE=InnoDB DEFAULT CHARSET=gbk;
+或者这样
+alter table 表名 modify id int auto_increment primary key;
 
 删除一张表：drop table tablename;
 
+alter修改表字段：
+	ALTER TABLE table_name ADD column_name data_type;
+	ALTER TABLE table_name ALTER COLUMN column_name data_type;
+	ALTER TABLE table_name DROP COLUMN column_name;
 
 (1)使用ALTER TABLE语句创建索性 ，应用于表创建完毕之后再添加。
 
@@ -59,13 +63,13 @@ CREATE UNIQUE INDEX index_name ON table_name (column_list)
 table_name、index_name和column_list具有与ALTER TABLE语句中相同的含义，索引名不可选。另外，不能用CREATE INDEX语句创建PRIMARY KEY索引。
 
 (3)删除索引
-     删除索引可以使用ALTER TABLE或DROP INDEX语句来实现。DROP INDEX可以在ALTER TABLE内部作为一条语句处理，其格式如下：
+    删除索引可以使用ALTER TABLE或DROP INDEX语句来实现。DROP INDEX可以在ALTER TABLE内部作为一条语句处理，其格式如下：
 
-drop index index_name on table_name ;
+	drop index index_name on table_name ;
 
-alter table table_name drop index index_name ;
+	alter table table_name drop index index_name ;
 
-alter table table_name drop primary key ;
+	alter table table_name drop primary key ;
 　　其中，在前面的两条语句中，都删除了table_name中的索引index_name。
 	而在最后一条语句中，只在删除PRIMARY KEY索引中使用，因为一个表只可能有一个PRIMARY KEY索引，因此不需要指定索引名。
 	如果没有创建PRIMARY KEY索引，但表具有一个或多个UNIQUE索引，则MySQL将删除第一个UNIQUE索引。
